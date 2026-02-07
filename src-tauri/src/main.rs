@@ -86,10 +86,12 @@ fn main() {
 
             log::info!("app starting");
 
-            let window = app.get_window("main").unwrap();
             #[cfg(target_os = "macos")]
-            apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None)
-                .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
+            {
+                let window = app.get_window("main").unwrap();
+                apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None)
+                    .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
+            }
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![frontend_log])
