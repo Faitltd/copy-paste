@@ -12,8 +12,8 @@ Recommended GitHub settings for `main`:
 Required checks (suggested):
 
 - `CI / Frontend`
+- `CI / Marketing (www)`
 - `CI / Rust Lint (src-tauri)`
 - `CI / Rust Check (macos-latest)`
 - `CI / Rust Check (ubuntu-22.04)`
 - `CI / Rust Check (windows-latest)`
-
