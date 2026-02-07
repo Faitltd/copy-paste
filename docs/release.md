@@ -1,6 +1,6 @@
 # Releasing
 
-This repo builds a Tauri (v1) desktop app with a Next.js frontend.
+This repo builds Copy Pasta (Tauri v1) with a Next.js frontend.
 
 ## Versioning
 
@@ -18,6 +18,12 @@ See `docs/updater.md`.
 
 The release workflow is in `.github/workflows/release.yml` and uses `tauri-apps/tauri-action`.
 It runs on `workflow_dispatch` or when you push a tag matching `app-v*`.
+
+It builds:
+
+- macOS (universal)
+- Windows
+- Linux
 
 Required secrets:
 
@@ -41,6 +47,20 @@ Windows code signing secrets (required for fully automated Windows releases):
 
 - `WINDOWS_CERTIFICATE` (base64-encoded `.pfx` / `.p12`)
 - `WINDOWS_CERTIFICATE_PASSWORD`
+
+### Creating The Secrets
+
+macOS `.p12`:
+
+```bash
+base64 -i "./certificate.p12" | pbcopy
+```
+
+Windows `.pfx` (on macOS/Linux):
+
+```bash
+base64 -i "./certificate.pfx"
+```
 
 ## Local Build
 
