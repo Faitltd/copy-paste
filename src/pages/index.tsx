@@ -2,9 +2,9 @@ import type { NextPage } from "next"
 import Image from "next/image"
 import { useCallback, useMemo, useState } from "react"
 
+import { ClipList } from "@/components/ClipList"
 import Empty from "@/components/Empty"
 import { SearchIcon } from "@/components/Icons"
-import { ClipboardItem } from "@/components/TextCard"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -83,24 +83,14 @@ const Home: NextPage = () => {
             }}
           />
         </div>
+        {!monitorEnabled ? (
+          <div className="w-full rounded-md bg-amber-50 p-2 text-xs text-amber-900">
+            Clipboard monitoring is paused. Enable it to capture new clips.
+          </div>
+        ) : null}
       </CardHeader>
-      <CardContent className="p-0 flex flex-col overflow-auto">
-        <div className="flex-1 flex flex-col gap-2 px-6 items-start">
-          {!monitorEnabled ? (
-            <div className="w-full rounded-md bg-amber-50 p-2 text-xs text-amber-900">
-              Clipboard monitoring is paused. Enable it to capture new clips.
-            </div>
-          ) : null}
-          {filteredClips.length > 0 ? (
-            <div className="grid gap-2 text-sm w-full">
-              {filteredClips.map((item) => (
-                <ClipboardItem key={item.text} clip={item} />
-              ))}
-            </div>
-          ) : (
-            <Empty />
-          )}
-        </div>
+      <CardContent className="flex flex-col overflow-hidden p-0">
+        {filteredClips.length > 0 ? <ClipList clips={filteredClips} /> : <Empty />}
       </CardContent>
       <CardFooter className="p-0">
         <footer className="flex justify-between p-4">
