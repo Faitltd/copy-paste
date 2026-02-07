@@ -12,6 +12,18 @@ updates:
         patterns:
           - "*"
 
+  # Enable version updates for the marketing site
+  - package-ecosystem: "npm"
+    directory: "/www"
+    schedule:
+      interval: "weekly"
+    allow:
+      - dependency-type: "all"
+    groups:
+      all:
+        patterns:
+          - "*"
+
   # Enable version updates for rust
   - package-ecosystem: "cargo"
     directory: "/src-tauri"
@@ -19,6 +31,16 @@ updates:
       interval: "weekly"
     allow:
       - dependency-type: "all"
+    groups:
+      all:
+        patterns:
+          - "*"
+
+  # Keep GitHub Actions up to date
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
     groups:
       all:
         patterns:

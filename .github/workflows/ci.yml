@@ -39,6 +39,29 @@ jobs:
       - name: Build (Next export)
         run: pnpm next-build
 
+  marketing:
+    name: Marketing (www)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        working-directory: www
+        run: npm ci
+
+      - name: Lint
+        working-directory: www
+        run: npm run lint
+
+      - name: Build
+        working-directory: www
+        run: npm run build
+
   rust-lint:
     name: Rust Lint (src-tauri)
     runs-on: macos-latest
@@ -82,7 +105,7 @@ jobs:
         if: matrix.platform == 'ubuntu-22.04'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.0-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+          sudo apt-get install -y libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
 
       - name: Check
         working-directory: src-tauri

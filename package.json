@@ -2,16 +2,17 @@
   "name": "copy-pasta",
   "version": "0.1.2",
   "private": true,
+  "license": "MIT",
   "author": {
     "name": "Raymond Kinne III",
     "email": "Ray@itsfait.com"
   },
   "scripts": {
-    "next-start": "cross-env BROWSER=none NODE_OPTIONS='--inspect' next dev",
+    "next-start": "next dev",
     "next-build": "next build",
     "tauri": "tauri",
     "build": "tauri build",
-    "build:unsigned": "tauri build --bundles app,dmg",
+    "build:unsigned": "node scripts/build-unsigned.mjs",
     "dev": "tauri dev -c src-tauri/tauri.conf.dev.json",
     "lint": "next lint",
     "prepare": "husky install"
@@ -53,7 +54,6 @@
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
     "autoprefixer": "^10.4.19",
-    "cross-env": "^7.0.3",
     "cssnano": "^7.0.2",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.4",

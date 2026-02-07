@@ -115,8 +115,13 @@ export default function Home() {
               aria-hidden="true"
               src="/try-it.png"
               className="absolute w-40 left-2/3 -top-2 select-none hidden sm:block"
+              alt=""
             />
-            <img src="/pasta.png" className="w-full mx-auto rounded-lg shadow-lg" />
+            <img
+              src="/pasta.png"
+              className="w-full mx-auto rounded-lg shadow-lg"
+              alt="Copy Pasta app screenshot"
+            />
           </div>
         </div>
         <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white sm:h-32" />
@@ -127,20 +132,19 @@ export default function Home() {
           <div className="w-full flex flex-col">
             <div className="flex justify-center text-center">
               <h2 className="font-heading text-4xl lg:text-5xl font-bold leading-tight text-balance sm:leading-none tracking-tight">
-                "Clipboard managers{" "}
+                &ldquo;Clipboard managers{" "}
                 <span className="bg-red-500 text-white font-scary px-3">f@#k!ng</span>{" "}
-                suck"
+                suck&rdquo;
               </h2>
             </div>
             <p className="mx-auto mt-8 text-center text-sm max-w-xl">
               - guy from my twitter (i forgot who 💀)
             </p>
-            <p></p>
 
             <p className="text-center mx-auto mt-12 text-lg max-w-xl text-balance">
               <span className="font-semibold">Clipboard managers are not great</span>{" "}
               and <span className="font-semibold">not free</span>. Not anymore.
-              Introducing a fast, free and open-source alternative. It's like Time
+              Introducing a fast, free and open-source alternative. It&apos;s like Time
               Machine for your clipboard.
             </p>
 

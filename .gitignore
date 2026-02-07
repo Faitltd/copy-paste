@@ -14,6 +14,9 @@
 
 # tauri / rust
 /src-tauri/target/
+src-tauri/tauri.conf.windows-sign.json
+certificate.p12
+certificate.pfx
 
 # production
 /build

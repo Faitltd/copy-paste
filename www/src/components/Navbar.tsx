@@ -9,7 +9,7 @@ const Navbar = () => {
             href="/"
             className="relative sm:absolute inset-y-0 left-0 flex items-center font-semibold"
           >
-            <img src="/icon.png" className="h-6 w-6 mr-1.5" />
+            <img src="/icon.png" className="h-6 w-6 mr-1.5" alt="Copy Pasta icon" />
             <span>Copy Pasta</span>
           </Link>
 
