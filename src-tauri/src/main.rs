@@ -1,5 +1,8 @@
-use tauri::{CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem};
+use tauri::{
+    CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem,
+};
 use tauri_plugin_autostart::MacosLauncher;
+use tauri_plugin_log::LogTarget;
 use tauri_plugin_positioner::{Position, WindowExt};
 use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
 
@@ -7,6 +10,17 @@ use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
+#[tauri::command]
+fn frontend_log(level: String, message: String, details: Option<String>) {
+    let details = details.unwrap_or_default();
+    match level.as_str() {
+        "debug" => log::debug!("{message}\n{details}"),
+        "info" => log::info!("{message}\n{details}"),
+        "warn" => log::warn!("{message}\n{details}"),
+        _ => log::error!("{message}\n{details}"),
+    }
+}
+
 fn main() {
     let show_hide = CustomMenuItem::new("toggle".to_string(), "Show/Hide");
     let quit = CustomMenuItem::new("quit".to_string(), "Quit Pasta");
@@ -17,6 +31,11 @@ fn main() {
     let context = tauri::generate_context!();
     tauri::Builder::default()
         .plugin(tauri_plugin_clipboard::init())
+        .plugin(
+            tauri_plugin_log::Builder::default()
+                .targets([LogTarget::LogDir, LogTarget::Stdout])
+                .build(),
+        )
         .plugin(tauri_plugin_positioner::init())
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
@@ -48,25 +67,35 @@ fn main() {
                     "toggle" => toggle_window(),
                     "quit" => app.exit(0),
                     _ => {}
-                }
+                },
                 _ => {}
             }
         })
-        .on_window_event(|event| match event.event() {
-            tauri::WindowEvent::Focused(is_focused) => {
+        .on_window_event(|event| {
+            if let tauri::WindowEvent::Focused(is_focused) = event.event() {
                 if !is_focused {
-                    event.window().hide().unwrap();
+                    let _ = event.window().hide();
                 }
             }
-            _ => {}
         })
         .setup(|app| {
+            // Ensure panics end up in the log file as well as stderr.
+            let default_hook = std::panic::take_hook();
+            std::panic::set_hook(Box::new(move |panic_info| {
+                let backtrace = std::backtrace::Backtrace::force_capture();
+                log::error!("panic: {panic_info}\n{backtrace}");
+                default_hook(panic_info);
+            }));
+
+            log::info!("app starting");
+
             let window = app.get_window("main").unwrap();
             #[cfg(target_os = "macos")]
             apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None)
                 .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
             Ok(())
         })
+        .invoke_handler(tauri::generate_handler![frontend_log])
         .run(context)
         .expect("error while running tauri application");
 }

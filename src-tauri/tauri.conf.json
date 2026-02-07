@@ -13,14 +13,8 @@
   "tauri": {
     "macOSPrivateApi": true,
     "allowlist": {
-      "clipboard": {
-        "readText": true,
-        "writeText": true
-      },
       "globalShortcut": {
-        "isRegistered": true,
-        "register": true,
-        "unregister": true
+        "all": true
       },
       "process": {
         "exit": true
@@ -70,6 +64,9 @@
     },
     "updater": {
       "active": true,
+      "endpoints": [
+        "https://github.com/Faitltd/copy-paste/releases/latest/download/latest.json"
+      ],
       "dialog": false,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDlCRDhBRkJDOTFFMjg1MDkKUldRSmhlS1J2Sy9ZbS9qMHExclIrZ0FvVmM4RFNaa3Eya3VkL3VoUnR2TlVhY2dNL0tKd3JvZFUK"
     },
