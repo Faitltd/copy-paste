@@ -7,7 +7,7 @@
     "distDir": "../out"
   },
   "package": {
-    "productName": "Pasta!",
+    "productName": "Pasta",
     "version": "0.1.2"
   },
   "tauri": {

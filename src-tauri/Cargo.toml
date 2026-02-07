@@ -1,10 +1,10 @@
 [package]
 name = "app"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+version = "0.1.2"
+description = "Pasta is an open source clipboard manager for macOS."
+authors = ["Daniel Denis <dankatdennis@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/Faitltd/copy-paste"
 default-run = "app"
 edition = "2021"
 rust-version = "1.66"
@@ -21,10 +21,8 @@ serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "1.5", features = [ "updater", "system-tray", "macos-private-api", "global-shortcut-all", "process-exit", "window-hide", "window-set-focus", "window-show", "window-unminimize" ] }
 window-vibrancy = "0.4.0"
 tauri-plugin-clipboard = "0.6.0"
-tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", rev = "6b9f9f8d1580f03d3cffbb8d29f4c6ab017d1589" }
 tauri-plugin-positioner = { version = "1.0.4", features = ["system-tray"] }
-tauri-plugin-autostart = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
-cocoa = "0.25.0"
 
 [features]
 # by default Tauri runs in production mode

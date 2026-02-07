@@ -17,11 +17,16 @@ See `docs/updater.md`.
 ## GitHub Actions
 
 The release workflow is in `.github/workflows/release.yml` and uses `tauri-apps/tauri-action`.
+It runs on `workflow_dispatch` or when you push a tag matching `app-v*`.
 
 Required secrets:
 
 - `TAURI_PRIVATE_KEY`
-- `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` (if your key is password protected)
+- `TAURI_KEY_PASSWORD` (if your key is password protected)
+
+Compatibility:
+
+- Older workflows may use `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`. The current workflow supports either secret name.
 
 Recommended (macOS signing/notarization) secrets:
 
@@ -41,4 +46,3 @@ pnpm tauri build
 - Production distribution on macOS typically requires codesigning and notarization.
 - Tauri's GitHub Action supports signing/notarization when the appropriate secrets are configured.
 - Validate the produced `.app`/`.dmg` with `codesign` and `spctl` before shipping.
-

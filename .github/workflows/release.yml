@@ -1,18 +1,20 @@
-name: 'publish'
+name: Publish
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - release
-      - main
+    tags:
+      - app-v*
 
-# This workflow will trigger on each push to the `release` branch to create or update a GitHub release, build your app, and upload the artifacts to the release.
+# This workflow creates or updates a GitHub release, builds the app, and uploads artifacts.
 
 jobs:
   publish-tauri:
     env:
       TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
-      TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+      # Prefer the official env var name, but keep compatibility with older secret naming.
+      TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD || secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+      TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD || secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
       TERM: xterm-256color
     permissions:
       contents: write
@@ -29,32 +31,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: setup node
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: 20
 
-      - uses: pnpm/action-setup@v3
-        name: setup pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 9
 
-      - name: install Rust stable
+      - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
           # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
           targets: ${{ matrix.settings.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
-      - name: install frontend dependencies
-        run: pnpm install --no-frozen-lockfile # change this to npm, pnpm or bun depending on which one you use.
+      - name: Install frontend dependencies
+        run: pnpm install --frozen-lockfile
 
-      - uses: tauri-apps/tauri-action@dev
+      - uses: tauri-apps/tauri-action@v0.6.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
           releaseName: 'App v__VERSION__'
           releaseBody: "Download the latest version of Pasta"
-          releaseDraft: true
+          releaseDraft: false
           prerelease: false
           args: ${{ matrix.settings.args }}

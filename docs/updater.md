@@ -35,7 +35,11 @@ The command prints a `pubkey` value. Put that in `src-tauri/tauri.conf.json` und
 The release workflow expects:
 
 - `TAURI_PRIVATE_KEY`: the private key contents (not a path)
-- `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`: private key password (if you used one)
+- `TAURI_KEY_PASSWORD`: private key password (if you used one)
+
+Compatibility:
+
+- Older workflows may use `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`. The current workflow supports either secret name.
 
 ## Local Verification (Optional)
 
@@ -44,4 +48,3 @@ You can sign any file and inspect the generated `.sig`:
 ```bash
 pnpm tauri signer sign -k "./tauri-signing.key" -p "<PASSWORD>" "./path/to/file"
 ```
-
