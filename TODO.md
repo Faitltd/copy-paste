@@ -24,7 +24,7 @@
 - [x] Configure macOS signing + notarization in `.github/workflows/release.yml`.
 - [x] Decide supported platforms (macOS + Windows + Linux) and update release matrix accordingly.
 - [x] Fill in Tauri bundle metadata in `src-tauri/tauri.conf.json` (descriptions, copyright).
-- [ ] Add branch protection rules in GitHub (require CI checks, disallow direct pushes to `main`).
+- [ ] Add branch protection rules in GitHub (require CI checks, disallow direct pushes to `main`). See `docs/branch-protection.md`.
 - [ ] Run a release drill:
 - [ ] Create a release, download artifacts, verify app launches.
 - [ ] Verify updater works end-to-end with `latest.json` from GitHub Releases.

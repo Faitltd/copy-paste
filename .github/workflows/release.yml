@@ -19,11 +19,11 @@ jobs:
       matrix:
         include:
           - platform: macos-latest
-            args: --target universal-apple-darwin
+            args: --target universal-apple-darwin --bundles app,dmg,updater
           - platform: ubuntu-22.04
-            args: ""
+            args: --bundles appimage,deb,updater
           - platform: windows-latest
-            args: --config src-tauri/tauri.conf.windows-sign.json
+            args: --bundles msi,updater --config src-tauri/tauri.conf.windows-sign.json
 
     runs-on: ${{ matrix.platform }}
 
