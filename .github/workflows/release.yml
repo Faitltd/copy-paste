@@ -23,7 +23,7 @@ jobs:
           - platform: ubuntu-22.04
             args: --bundles appimage,deb,updater
           - platform: windows-latest
-            args: --bundles msi,updater --config src-tauri/tauri.conf.windows-sign.json
+            args: --bundles msi,updater
 
     runs-on: ${{ matrix.platform }}
 
@@ -56,7 +56,7 @@ jobs:
         if: matrix.platform == 'ubuntu-22.04'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
+          sudo apt-get install -y libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf libfuse2 libxcb-shape0 libxcb-xfixes0
 
       - name: Install frontend dependencies
         run: pnpm install --frozen-lockfile
@@ -85,7 +85,7 @@ jobs:
           echo "APPLE_SIGNING_IDENTITY=$CERT_ID" >> "$GITHUB_ENV"
 
       - name: Import Windows Code Signing Certificate (Windows only)
-        if: matrix.platform == 'windows-latest'
+        if: matrix.platform == 'windows-latest' && secrets.WINDOWS_CERTIFICATE != '' && secrets.WINDOWS_CERTIFICATE_PASSWORD != ''
         shell: pwsh
         env:
           WINDOWS_CERTIFICATE: ${{ secrets.WINDOWS_CERTIFICATE }}
@@ -100,7 +100,7 @@ jobs:
           "WINDOWS_CERTIFICATE_THUMBPRINT=$thumb" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Write Windows Signing Config (Windows only)
-        if: matrix.platform == 'windows-latest'
+        if: matrix.platform == 'windows-latest' && env.WINDOWS_CERTIFICATE_THUMBPRINT != ''
         shell: pwsh
         run: |
           $thumb = $env:WINDOWS_CERTIFICATE_THUMBPRINT
@@ -131,4 +131,4 @@ jobs:
           releaseBody: Download the latest version of Copy Pasta.
           releaseDraft: false
           prerelease: false
-          args: ${{ matrix.args }}
+          args: ${{ matrix.args }}${{ matrix.platform == 'windows-latest' && env.WINDOWS_CERTIFICATE_THUMBPRINT != '' && ' --config src-tauri/tauri.conf.windows-sign.json' || '' }}

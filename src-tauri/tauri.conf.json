@@ -68,7 +68,7 @@
       "endpoints": [
         "https://github.com/Faitltd/copy-paste/releases/latest/download/latest.json"
       ],
-      "dialog": false,
+      "dialog": true,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEJCNTdEMjk3QzY4QTk3RjIKUldUeWw0ckdsOUpYdTFBOFlCazQweWt3RFVOcnpEQnNUZUJzV21waVU1cVBiZHVjR040dkVVa0IK"
     },
     "windows": [
