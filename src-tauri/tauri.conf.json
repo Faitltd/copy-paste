@@ -1,0 +1,93 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "build": {
+    "beforeBuildCommand": "pnpm next-build",
+    "beforeDevCommand": "pnpm next-start",
+    "devPath": "http://localhost:3000",
+    "distDir": "../out"
+  },
+  "package": {
+    "productName": "Pasta!",
+    "version": "0.1.2"
+  },
+  "tauri": {
+    "macOSPrivateApi": true,
+    "allowlist": {
+      "clipboard": {
+        "readText": true,
+        "writeText": true
+      },
+      "globalShortcut": {
+        "isRegistered": true,
+        "register": true,
+        "unregister": true
+      },
+      "process": {
+        "exit": true
+      },
+      "window": {
+        "hide": true,
+        "setFocus": true,
+        "show": true,
+        "unminimize": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.katungi.pasta",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' data: blob:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' http://localhost:3000; connect-src 'self' ipc: http://localhost:3000 ws://localhost:3000;"
+    },
+    "updater": {
+      "active": true,
+      "dialog": false,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDlCRDhBRkJDOTFFMjg1MDkKUldRSmhlS1J2Sy9ZbS9qMHExclIrZ0FvVmM4RFNaa3Eya3VkL3VoUnR2TlVhY2dNL0tKd3JvZFUK"
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": false,
+        "title": "Pasta",
+        "width": 380,
+        "height": 600,
+        "decorations": false,
+        "visible": false
+      }
+    ],
+    "systemTray": {
+      "iconPath": "icons/Square310x310Logo.png",
+      "iconAsTemplate": true,
+      "menuOnLeftClick": false
+    }
+  }
+}
