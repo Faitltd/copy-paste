@@ -7,12 +7,15 @@ export interface Clip {
 }
 export interface ClipsStore {
   clips: Clip[]
+  monitorEnabled: boolean
+  setMonitorEnabled: (enabled: boolean) => void
+  toggleMonitorEnabled: () => void
   updateClips: (clip: string) => void
   removeClip: (clipText: string) => void
 }
 
 const MAX_CLIPS = 200
-type ClipStorePersist = Pick<ClipsStore, "clips">
+type ClipStorePersist = Pick<ClipsStore, "clips" | "monitorEnabled">
 
 const noop = () => undefined
 
@@ -22,16 +25,18 @@ const createNoopStorage = (): PersistStorage<ClipStorePersist> => ({
   removeItem: noop,
 })
 
-const getBrowserStorage = () =>
-  createJSONStorage<ClipStorePersist>(() => localStorage)
+const getBrowserStorage = () => createJSONStorage<ClipStorePersist>(() => localStorage)
 
 const clipStorage: PersistStorage<ClipStorePersist> =
   typeof window !== "undefined"
-    ? getBrowserStorage() ?? createNoopStorage()
+    ? (getBrowserStorage() ?? createNoopStorage())
     : createNoopStorage()
 
 const initialState: ClipsStore = {
   clips: [],
+  monitorEnabled: false,
+  setMonitorEnabled: noop,
+  toggleMonitorEnabled: noop,
   updateClips: noop,
   removeClip: noop,
 }
@@ -39,6 +44,12 @@ export const useClipStore = create<ClipsStore>()(
   persist(
     (set) => ({
       ...initialState,
+      setMonitorEnabled: (enabled) => {
+        set({ monitorEnabled: enabled })
+      },
+      toggleMonitorEnabled: () => {
+        set((state) => ({ monitorEnabled: !state.monitorEnabled }))
+      },
       updateClips: (clipText) => {
         set((state) => {
           if (!clipText) return state
@@ -71,7 +82,10 @@ export const useClipStore = create<ClipsStore>()(
     {
       name: "pasta-clips",
       storage: clipStorage,
-      partialize: (state) => ({ clips: state.clips }),
+      partialize: (state) => ({
+        clips: state.clips,
+        monitorEnabled: state.monitorEnabled,
+      }),
     },
   ),
 )

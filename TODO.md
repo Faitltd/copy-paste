@@ -5,7 +5,7 @@
 - [x] Run lint/typecheck now that build ignores are removed.
 - [x] Define CSP and reduce Tauri allowlist to least privilege.
 - [ ] Tighten CSP for production (remove dev allowances like `unsafe-eval`/localhost).
-- [ ] Add privacy controls (consent + pause/resume monitoring).
+- [x] Add privacy controls (consent + pause/resume monitoring).
 - [ ] Configure updater endpoints and signing verification.
 - [ ] Add crash reporting and structured logs.
 - [ ] Implement long-list performance (virtualized list).

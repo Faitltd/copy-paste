@@ -5,8 +5,8 @@ import { useEffect } from "react"
 import { isTauri } from "@/lib/tauri"
 
 interface ClipboardMonitorOptions {
+  enabled?: boolean
   onText: (text: string) => void
-  shortcut?: string
   debounceMs?: number
 }
 
@@ -22,59 +22,32 @@ const isStopListener = (value: unknown): value is () => Promise<void> =>
   typeof value === "function"
 
 export const useClipboardMonitor = ({
+  enabled = true,
   onText,
-  shortcut = "CommandOrControl+Shift+V",
   debounceMs = 300,
 }: ClipboardMonitorOptions) => {
   useEffect(() => {
+    if (!enabled) return
     if (!isTauri()) return
 
     let unlistenTextUpdate: UnlistenFn | null = null
     let stopListening: (() => Promise<void>) | null = null
-    let unregisterShortcut: (() => Promise<void>) | null = null
     let disposed = false
-    const isDisposed = () => disposed
 
     const debouncedOnText = debounce((text: string) => {
-      if (!isDisposed()) {
+      if (!disposed) {
         onText(text)
       }
     }, debounceMs)
 
     const setup = async () => {
-      const [{ appWindow }, globalShortcutModule, clipboardModule] = await Promise.all([
-        import("@tauri-apps/api/window"),
-        import("@tauri-apps/api/globalShortcut"),
-        import("tauri-plugin-clipboard-api"),
-      ])
+      const clipboardModule =
+        (await import("tauri-plugin-clipboard-api")) as ClipboardModule
 
-      if (isDisposed()) return
+      if (disposed) return
 
-      if (shortcut) {
-        const isShortcutRegistered = await globalShortcutModule.isRegistered(shortcut)
-        if (!isShortcutRegistered) {
-          const handleShortcut = () => {
-            void appWindow.show()
-            void appWindow.unminimize()
-            void appWindow.setFocus()
-          }
-          await globalShortcutModule.register(shortcut, handleShortcut)
-        }
-        unregisterShortcut = async () => {
-          const isRegistered = await globalShortcutModule.isRegistered(shortcut)
-          if (isRegistered) {
-            await globalShortcutModule.unregister(shortcut)
-          }
-        }
-      }
-
-      if (isDisposed()) return
-
-      const clipboardModuleTyped = clipboardModule as ClipboardModule
       const clipboard =
-        "default" in clipboardModuleTyped
-          ? clipboardModuleTyped.default
-          : clipboardModuleTyped
+        "default" in clipboardModule ? clipboardModule.default : clipboardModule
 
       if (clipboard.onTextUpdate) {
         unlistenTextUpdate = await clipboard.onTextUpdate((text) => {
@@ -105,9 +78,6 @@ export const useClipboardMonitor = ({
       if (stopListening) {
         void stopListening()
       }
-      if (unregisterShortcut) {
-        void unregisterShortcut()
-      }
     }
-  }, [debounceMs, onText, shortcut])
+  }, [debounceMs, enabled, onText])
 }
