@@ -11,7 +11,7 @@
     "next-build": "next build",
     "tauri": "tauri",
     "build": "tauri build",
-    "dev": "tauri dev",
+    "dev": "tauri dev -c src-tauri/tauri.conf.dev.json",
     "lint": "next lint",
     "prepare": "husky install"
   },
