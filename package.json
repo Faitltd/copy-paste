@@ -11,6 +11,7 @@
     "next-build": "next build",
     "tauri": "tauri",
     "build": "tauri build",
+    "build:unsigned": "tauri build --bundles app,dmg",
     "dev": "tauri dev -c src-tauri/tauri.conf.dev.json",
     "lint": "next lint",
     "prepare": "husky install"

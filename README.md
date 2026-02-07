@@ -26,8 +26,12 @@ Build:
 
 ```bash
 pnpm next-build
-pnpm build
+pnpm build:unsigned
 ```
+
+`pnpm build:unsigned` skips the updater bundle so it does not require signing keys.
+
+Signed builds (required for updater-enabled release artifacts) require setting `TAURI_PRIVATE_KEY` and optionally `TAURI_KEY_PASSWORD` before running `pnpm build`.
 
 ## Updater / Releases
 

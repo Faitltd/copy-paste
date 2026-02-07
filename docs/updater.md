@@ -14,6 +14,8 @@ Current feed URL:
 
 Note: GitHub draft releases are not visible to the updater. Publish the release for clients to see it.
 
+Note: With updater signing enabled, `tauri build` requires `TAURI_PRIVATE_KEY` (and optionally `TAURI_KEY_PASSWORD`) or it will fail. For local packaging without signing, use `pnpm build:unsigned` (skips the updater bundle).
+
 ## Generating Signing Keys
 
 Generate a keypair locally (do not commit the private key):

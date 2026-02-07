@@ -38,8 +38,12 @@ Recommended (macOS signing/notarization) secrets:
 ```bash
 pnpm install
 pnpm next-build
-pnpm tauri build
+pnpm build:unsigned
 ```
+
+`pnpm build:unsigned` skips the updater bundle so it does not require signing keys.
+
+For a signed (updater-enabled) build locally, set `TAURI_PRIVATE_KEY` (and optionally `TAURI_KEY_PASSWORD`) then run `pnpm build`.
 
 ## macOS Codesigning/Notarization Notes
 
