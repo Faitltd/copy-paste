@@ -25,7 +25,8 @@
 - [x] Decide supported platforms (macOS + Windows + Linux) and update release matrix accordingly.
 - [x] Fill in Tauri bundle metadata in `src-tauri/tauri.conf.json` (descriptions, copyright).
 - [ ] Add branch protection rules in GitHub (require CI checks, disallow direct pushes to `main`). See `docs/branch-protection.md`.
-- [ ] Run a release drill:
-- [ ] Create a release, download artifacts, verify app launches.
-- [ ] Verify updater works end-to-end with `latest.json` from GitHub Releases.
+- [ ] Run a release drill (manual), then confirm:
+- [ ] Release artifacts install and run on macOS, Windows, and Linux.
+- [ ] Updater works end-to-end using `latest.json` from GitHub Releases.
+- [x] Document the release drill steps. See `docs/release-drill.md`.
 - [x] Add a short privacy note (README or in-app) describing clipboard capture and where data is stored.
