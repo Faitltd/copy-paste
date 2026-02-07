@@ -1,8 +1,8 @@
 [package]
 name = "app"
 version = "0.1.2"
-description = "Pasta is an open source clipboard manager for macOS."
-authors = ["Daniel Denis <dankatdennis@gmail.com>"]
+description = "Copy Pasta is an open source clipboard manager."
+authors = ["Raymond Kinne III <Ray@itsfait.com>"]
 license = "MIT"
 repository = "https://github.com/Faitltd/copy-paste"
 default-run = "app"

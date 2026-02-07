@@ -7,7 +7,7 @@
     "distDir": "../out"
   },
   "package": {
-    "productName": "Pasta",
+    "productName": "Copy Pasta",
     "version": "0.1.2"
   },
   "tauri": {
@@ -28,8 +28,8 @@
     },
     "bundle": {
       "active": true,
-      "category": "DeveloperTool",
-      "copyright": "",
+      "category": "Productivity",
+      "copyright": "Copyright (c) 2026 Raymond Kinne III",
       "deb": {
         "depends": []
       },
@@ -41,8 +41,8 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.katungi.pasta",
-      "longDescription": "",
+      "identifier": "com.faitltd.copypasta",
+      "longDescription": "Copy Pasta saves your clipboard history so you can quickly find and reuse previous copies.",
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
@@ -51,12 +51,13 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
+      "shortDescription": "Clipboard manager",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
-        "timestampUrl": ""
+        "timestampUrl": "http://timestamp.digicert.com",
+        "tsp": true
       }
     },
     "security": {
@@ -74,7 +75,7 @@
       {
         "fullscreen": false,
         "resizable": false,
-        "title": "Pasta",
+        "title": "Copy Pasta",
         "width": 380,
         "height": 600,
         "decorations": false,
@@ -83,7 +84,7 @@
     ],
     "systemTray": {
       "iconPath": "icons/Square310x310Logo.png",
-      "iconAsTemplate": true,
+      "iconAsTemplate": false,
       "menuOnLeftClick": false
     }
   }

@@ -1,12 +1,12 @@
-# Pasta
+# Copy Pasta
 
-Pasta is an open source clipboard manager for Mac (currently).
+Copy Pasta is an open source clipboard manager for macOS, Windows, and Linux.
 
 It's simple, lightweight and easy to use.
 
-## How To Pasta
+## How To Copy Pasta
 
-`cmd + Shift + V` , it's as easy as that.
+`Cmd/Ctrl + Shift + V`, it's as easy as that.
 
 ## Development
 
@@ -37,6 +37,11 @@ Signed builds (required for updater-enabled release artifacts) require setting `
 
 - Updater configuration: `docs/updater.md`
 - Release notes: `docs/release.md`
+
+## Privacy
+
+- Clipboard monitoring is disabled by default. Enable it in-app to start capturing.
+- Clipboard history is stored locally on your machine.
 
 ## `www/` Folder
 

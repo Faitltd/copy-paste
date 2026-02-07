@@ -39,8 +39,8 @@ jobs:
       - name: Build (Next export)
         run: pnpm next-build
 
-  rust:
-    name: Rust (src-tauri)
+  rust-lint:
+    name: Rust Lint (src-tauri)
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
@@ -57,6 +57,32 @@ jobs:
       - name: Clippy
         working-directory: src-tauri
         run: cargo clippy -- -D warnings
+
+      - name: Check
+        working-directory: src-tauri
+        run: cargo check
+
+  rust-check:
+    name: Rust Check (${{ matrix.platform }})
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - macos-latest
+          - ubuntu-22.04
+          - windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies (Ubuntu only)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.0-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
       - name: Check
         working-directory: src-tauri

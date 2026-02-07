@@ -3,6 +3,8 @@ use tauri::{
 };
 use tauri_plugin_log::LogTarget;
 use tauri_plugin_positioner::{Position, WindowExt};
+
+#[cfg(target_os = "macos")]
 use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
 
 #[cfg_attr(
@@ -22,7 +24,7 @@ fn frontend_log(level: String, message: String, details: Option<String>) {
 
 fn main() {
     let show_hide = CustomMenuItem::new("toggle".to_string(), "Show/Hide");
-    let quit = CustomMenuItem::new("quit".to_string(), "Quit Pasta");
+    let quit = CustomMenuItem::new("quit".to_string(), "Quit Copy Pasta");
     let system_tray_menu = SystemTrayMenu::new()
         .add_item(show_hide)
         .add_native_item(SystemTrayMenuItem::Separator)

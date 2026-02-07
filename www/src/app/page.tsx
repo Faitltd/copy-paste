@@ -1,4 +1,4 @@
-import { AppleIcon, Check, Star } from "lucide-react"
+import { Check, Download, Star } from "lucide-react"
 import Link from "next/link"
 
 import { Icons } from "@/components/Icons"
@@ -18,13 +18,12 @@ export default function Home() {
                 )}
               >
                 <span className="whitespace-nowrap">
-                  Pas
-                  <span className={cn("font-scary font-bold text-red-500")}>ta</span>
+                  Copy{" "}
+                  <span className={cn("font-scary font-bold text-red-500")}>Pasta</span>
                 </span>
-                🍝
               </h1>
               <p className="mt-8 text-lg lg:pr-10 text-center lg:text-left text-balance md:text-wrap">
-                Clipboard managers for mac are
+                Clipboard managers are
                 <span className={cn("font-scary font-bold text-red-500")}>
                   {" "}
                   not great
@@ -37,14 +36,14 @@ export default function Home() {
               </p>
 
               <p className="mt-8 text-lg lg:pr-10 text-center lg:text-left text-balance md:text-wrap">
-                Pasta is still in{" "}
+                Copy Pasta is still in{" "}
                 <span className={cn("font-scary font-bold text-red-500")}> Beta</span> .
                 We are also looking for{" "}
                 <span className={cn("font-scary font-bold text-red-500")}>
                   {" "}
                   Contributors
                 </span>{" "}
-                to help us build the best clipboard manager for Mac.
+                to help us build the best clipboard manager for desktop.
               </p>
 
               <ul className="mt-8 space-y-2 font-medium flex flex-col items-center sm:items-start">
@@ -104,7 +103,7 @@ export default function Home() {
 
                   <p className="">
                     <span className="font-semibold">All these imaginary people</span>{" "}
-                    give Pasta a 5-star rating.
+                    give Copy Pasta a 5-star rating.
                   </p>
                 </div>
               </div>
@@ -128,7 +127,7 @@ export default function Home() {
           <div className="w-full flex flex-col">
             <div className="flex justify-center text-center">
               <h2 className="font-heading text-4xl lg:text-5xl font-bold leading-tight text-balance sm:leading-none tracking-tight">
-                "Mac Clipboards Managers{" "}
+                "Clipboard managers{" "}
                 <span className="bg-red-500 text-white font-scary px-3">f@#k!ng</span>{" "}
                 suck"
               </h2>
@@ -139,9 +138,7 @@ export default function Home() {
             <p></p>
 
             <p className="text-center mx-auto mt-12 text-lg max-w-xl text-balance">
-              <span className="font-semibold">
-                Mac clipboard managers are not great
-              </span>{" "}
+              <span className="font-semibold">Clipboard managers are not great</span>{" "}
               and <span className="font-semibold">not free</span>. Not anymore.
               Introducing a fast, free and open-source alternative. It's like Time
               Machine for your clipboard.
@@ -150,40 +147,21 @@ export default function Home() {
             <Icons.arrow className="h-60 -mt-4 text-zinc-400 fill-zinc-400 pointer-events-none select-none" />
 
             <p className="mt-6 sm:mt-12 z-10 text-center mx-auto text-3xl font-semibold">
-              Download for Mac
+              Download
             </p>
 
-            <div className="grid gap-40 sm:grid-cols-2 sm:gap-16 max-w-3xl mx-auto mt-40 text-center">
-              <div className="relative z-10">
-                <div className="absolute -z-10 left-1/2 -translate-x-1/2 -top-[90px]">
-                  <div className="absolute inset-x-0 -bottom-0 h-16 bg-gradient-to-t 0 from-blue-100 pointer-events-none"></div>
-                  <Link href="https://github.com/katungi/pasta/releases/download/app-v0.1.2/Pasta._0.1.2_x64.dmg">
-                    <Button className="bg-blue-100 text-red-500 hover:bg-blue-200 hover:text-red-600">
-                      <AppleIcon className="h-6 w-6 mr-2" />
-                      Download for Intel
-                    </Button>
-                  </Link>
-                </div>
-                <p className="font-semibold text-lg">Intel Chip</p>
-                <p className="mt-2 text-balance">
-                  Download the latest version of Pasta for Mac with Intel chips.
-                </p>
-              </div>
-
-              <div className="relative z-10">
-                <div className="absolute -z-10 left-1/2 -translate-x-1/2 -top-[90px]">
-                  <div className="absolute inset-x-0 -bottom-0 h-16 bg-gradient-to-t from-blue-100 pointer-events-none"></div>
-                  <Link href="https://github.com/katungi/pasta/releases/download/app-v0.1.2/Pasta._0.1.2_aarch64.dmg">
-                    <Button className="bg-blue-100 text-black hover:bg-blue-200 hover:text-red-600">
-                      <AppleIcon className="h-6 w-6 mr-2" />
-                      Download for Apple Silicon
-                    </Button>
-                  </Link>
-                </div>
-                <p className="font-semibold text-lg">Apple Silicon</p>
-                <p className="mt-2 text-balance">
-                  Download the latest version of Pasta for Mac with Apple Silicon chips.
-                </p>
+            <div className="max-w-xl mx-auto mt-8 text-center">
+              <p className="text-balance">
+                Download the latest release for macOS, Windows, and Linux from GitHub
+                Releases.
+              </p>
+              <div className="mt-6 flex justify-center">
+                <Link href="https://github.com/Faitltd/copy-paste/releases/latest">
+                  <Button className="bg-blue-100 text-black hover:bg-blue-200 hover:text-black">
+                    <Download className="h-5 w-5 mr-2" />
+                    Download Latest
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

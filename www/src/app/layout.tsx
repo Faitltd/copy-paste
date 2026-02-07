@@ -9,9 +9,9 @@ import Navbar from "@/components/Navbar"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Pasta - Clipboard manager for Mac",
+  title: "Copy Pasta - Clipboard manager",
   description:
-    "Pasta is a clipboard manager for Mac that saves everything you copy. It's like Time Machine for your clipboard.",
+    "Copy Pasta is a fast clipboard manager for macOS, Windows, and Linux that saves everything you copy.",
 }
 
 export default function RootLayout({

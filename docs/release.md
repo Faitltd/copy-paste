@@ -28,10 +28,19 @@ Compatibility:
 
 - Older workflows may use `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`. The current workflow supports either secret name.
 
-Recommended (macOS signing/notarization) secrets:
+macOS signing/notarization secrets (required for fully automated macOS releases):
 
-- Apple Developer signing certificate + password (names depend on how you wire the action)
-- Apple notarization API credentials (key id/issuer id/private key)
+- `APPLE_CERTIFICATE` (base64-encoded `.p12`)
+- `APPLE_CERTIFICATE_PASSWORD`
+- `KEYCHAIN_PASSWORD`
+- `APPLE_ID`
+- `APPLE_PASSWORD` (app-specific password)
+- `APPLE_TEAM_ID`
+
+Windows code signing secrets (required for fully automated Windows releases):
+
+- `WINDOWS_CERTIFICATE` (base64-encoded `.pfx` / `.p12`)
+- `WINDOWS_CERTIFICATE_PASSWORD`
 
 ## Local Build
 

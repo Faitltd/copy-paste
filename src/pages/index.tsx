@@ -52,9 +52,9 @@ const Home: NextPage = () => {
       <CardHeader className="px-6">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <Image src={"/icon.png"} alt={"pasta icon"} width={40} height={40} />
+            <Image src={"/icon.png"} alt={"copy pasta icon"} width={40} height={40} />
             <div className="flex flex-col">
-              <h2 className="text-lg font-bold leading-none">Pasta</h2>
+              <h2 className="text-lg font-bold leading-none">Copy Pasta</h2>
               <p className="text-sm text-gray-500 leading-none mt-2">
                 {clipCountLabel} Items
               </p>
@@ -100,7 +100,7 @@ const Home: NextPage = () => {
             variant="ghost"
             onClick={() => void handleQuit()}
           >
-            Quit Pasta 🍝
+            Quit Copy Pasta
           </Button>
         </footer>
       </CardFooter>

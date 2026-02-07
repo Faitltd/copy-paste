@@ -1,10 +1,10 @@
 {
-  "name": "Pasta",
+  "name": "copy-pasta",
   "version": "0.1.2",
   "private": true,
   "author": {
-    "name": "Daniel Denis",
-    "email": "dankatdennis@gmail.com"
+    "name": "Raymond Kinne III",
+    "email": "Ray@itsfait.com"
   },
   "scripts": {
     "next-start": "cross-env BROWSER=none NODE_OPTIONS='--inspect' next dev",

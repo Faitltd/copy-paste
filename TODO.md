@@ -15,15 +15,17 @@
 - [x] Remove unused files and placeholders (unused CSS, autostart plugin).
 - [x] Add CI workflow (`pnpm lint/tsc/next-build` + `cargo fmt/clippy/check`).
 - [x] Harden release workflow (manual/tag trigger, pinned tauri-action, frozen lockfile, published releases).
+- [x] Rename app branding to "Copy Pasta" (UI, configs, docs, `www/`).
+- [x] Update app icon (orange macaroni noodle).
 
 ## Still Needed (Before Shipping)
 
-- [ ] Confirm licensing/copyright and update `LICENSE` and package metadata accordingly.
-- [ ] Configure macOS signing + notarization in `.github/workflows/release.yml`.
-- [ ] Decide supported platforms (macOS only vs add Windows/Linux) and update release matrix accordingly.
-- [ ] Fill in Tauri bundle metadata in `src-tauri/tauri.conf.json` (descriptions, copyright).
+- [x] Confirm licensing/copyright and update `LICENSE` and package metadata accordingly.
+- [x] Configure macOS signing + notarization in `.github/workflows/release.yml`.
+- [x] Decide supported platforms (macOS + Windows + Linux) and update release matrix accordingly.
+- [x] Fill in Tauri bundle metadata in `src-tauri/tauri.conf.json` (descriptions, copyright).
 - [ ] Add branch protection rules in GitHub (require CI checks, disallow direct pushes to `main`).
 - [ ] Run a release drill:
 - [ ] Create a release, download artifacts, verify app launches.
 - [ ] Verify updater works end-to-end with `latest.json` from GitHub Releases.
-- [ ] Add a short privacy note (README or in-app) describing clipboard capture and where data is stored.
+- [x] Add a short privacy note (README or in-app) describing clipboard capture and where data is stored.

@@ -80,7 +80,7 @@ export const useClipStore = create<ClipsStore>()(
       },
     }),
     {
-      name: "pasta-clips",
+      name: "copy-pasta-clips",
       storage: clipStorage,
       partialize: (state) => ({
         clips: state.clips,
