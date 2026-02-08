@@ -14,6 +14,7 @@ interface ClipboardApi {
   onTextUpdate?: (handler: (text: string) => void) => Promise<UnlistenFn>
   startListening?: () => Promise<unknown>
   stopListening?: () => Promise<void>
+  startBruteForceTextMonitor?: (intervalMs?: number) => () => void
 }
 
 type ClipboardModule = ClipboardApi | { default: ClipboardApi }
@@ -31,7 +32,7 @@ export const useClipboardMonitor = ({
     if (!isTauri()) return
 
     let unlistenTextUpdate: UnlistenFn | null = null
-    let stopListening: (() => Promise<void>) | null = null
+    let stopListening: (() => Promise<void> | void) | null = null
     let disposed = false
 
     const debouncedOnText = debounce((text: string) => {
@@ -53,6 +54,14 @@ export const useClipboardMonitor = ({
         unlistenTextUpdate = await clipboard.onTextUpdate((text) => {
           debouncedOnText(text)
         })
+      }
+
+      const isMac =
+        typeof navigator !== "undefined" && navigator.userAgent.includes("Mac")
+
+      if (isMac && clipboard.startBruteForceTextMonitor) {
+        stopListening = clipboard.startBruteForceTextMonitor(500)
+        return
       }
 
       if (clipboard.startListening) {
